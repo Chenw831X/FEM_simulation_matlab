@@ -4,7 +4,7 @@
 % Created by Wei Chen on 8/4/21
 %
 
-function fem3d_tet_linear() % nvet: number of vertices, nele: number of elements
+function fem3d_linear_tet() % nvet: number of vertices, nele: number of elements
 nvet = 3168;
 nele = 16563;
 
