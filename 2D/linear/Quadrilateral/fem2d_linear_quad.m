@@ -20,9 +20,9 @@ function fem2d_linear_quad()
 
     % user-defined load dofs
     disp('compute load');
-    loadnid = nelx * (nely + 1);
+    loadnid = nelx * (nely + 1) + 1;
     loaddof = 2 * loadnid - 1;
-    F(loaddof, 1) = 100.0;
+    F(loaddof, 1) = 0.01;
 
     % user-defined support fixed dofs
     disp('compute DBC');
@@ -37,10 +37,10 @@ function fem2d_linear_quad()
         repmat([0 1 2*nely+[2 3 0 1] -2 -1], nele, 1);
     iK = reshape(kron(edofMat, ones(8, 1))', 8*8*nele, 1);
     jK = reshape(kron(edofMat, ones(1, 8))', 8*8*nele, 1);
-    Ke = lk;
+    KE = lk;
 
     % FE-ANALYSIS
-    sK = repmat(Ke(:), nele, 1);
+    sK = repmat(KE(:), nele, 1);
     K = sparse(iK,jK,sK); K = (K+K')/2;
     disp('solve');
     U(freedof, :) = K(freedof, freedof) \ F(freedof, :);
